@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package quote;
+
+service QuoteService {
+  rpc GetRandomQuote (Empty) returns (Quote) {}
+  rpc GetPage (Empty) returns (stream GetPageResponse);
+  rpc GetError (Empty) returns (Empty);
+}
+
+message Empty {};
+
+message Quote {
+  string id = 1;
+  string quote = 2;
+}
+
+message GetPageResponse {
+  string html_chunk = 1;
+}

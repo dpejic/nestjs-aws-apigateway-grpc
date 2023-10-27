@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["node"],
+    "composite": true
+  },
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "cdk.out"],
+  "include": ["**/*.ts", "../../libs/**/*.ts"]
+}

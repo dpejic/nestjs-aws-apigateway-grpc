@@ -1,0 +1,66 @@
+{
+  "name": "libs/apigateway-cdk",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/apigateway-cdk/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/apigateway-cdk",
+        "main": "libs/apigateway-cdk/src/index.ts",
+        "tsConfig": "libs/apigateway-cdk/tsconfig.lib.json",
+        "assets": [
+          "libs/apigateway-cdk/*.md",
+          {
+            "input": "./libs/apigateway-cdk/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/apigateway-cdk/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/apigateway-cdk",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/apigateway-cdk",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/apigateway-cdk/**/*.ts",
+          "libs/apigateway-cdk/package.json",
+          "libs/apigateway-cdk/executors.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/apigateway-cdk/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
